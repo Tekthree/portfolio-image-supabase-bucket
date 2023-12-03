@@ -2,7 +2,6 @@
 const express = require('express');
 const { createClient } = require('@supabase/supabase-js');
 require('dotenv').config(); // Load environment variables from .env file
-const cors = require('cors');
 
 // Create an Express.js app
 const app = express();
@@ -29,19 +28,6 @@ app.get('/fetch-images', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*'); // Replace '*' with your desired origin
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  );
-  next();
-});
-
-// Enable CORS for all origins
-app.use(cors());
 
 // Start the server
 app.listen(port, () => {
