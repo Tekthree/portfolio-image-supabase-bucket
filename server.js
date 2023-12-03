@@ -36,15 +36,7 @@ const allowedOrigins = [
 ];
 
 const corsOptions = {
-  origin: function (origin, callback) {
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      // Allow requests from listed origins or if no origin is provided (same-origin)
-      callback(null, true);
-    } else {
-      // Deny requests from other origins
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: '*',
 };
 
 // Enable CORS middleware with options
