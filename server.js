@@ -2,6 +2,7 @@
 const express = require('express');
 const { createClient } = require('@supabase/supabase-js');
 require('dotenv').config(); // Load environment variables from .env file
+const cors = require('cors');
 
 // Create an Express.js app
 const app = express();
@@ -28,6 +29,26 @@ app.get('/fetch-images', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+const allowedOrigins = [
+  'https://style-guide-7a5f76.webflow.io/',
+  'http://localhost:3000/',
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      // Allow requests from listed origins or if no origin is provided (same-origin)
+      callback(null, true);
+    } else {
+      // Deny requests from other origins
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+
+// Enable CORS middleware with options
+app.use(cors(corsOptions));
 
 // Start the server
 app.listen(port, () => {
