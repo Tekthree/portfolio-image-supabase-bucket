@@ -30,12 +30,8 @@ app.get('/fetch-images', async (req, res) => {
   }
 });
 
-const corsOptions = {
-  origin: '*',
-};
-
-// Enable CORS middleware with options
-app.use(cors(corsOptions));
+// Enable CORS for all origins
+app.use(cors());
 
 // Start the server
 app.listen(port, () => {
