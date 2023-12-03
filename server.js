@@ -2,6 +2,7 @@
 const express = require('express');
 const { createClient } = require('@supabase/supabase-js');
 require('dotenv').config(); // Load environment variables from .env file
+const cors = require('cors');
 
 // Create an Express.js app
 const app = express();
@@ -22,12 +23,16 @@ app.get('/fetch-images', async (req, res) => {
       throw error;
     }
 
+    res.header('Access-Control-Allow-Origin', '*'); // Allow requests from any origin
     res.json(data);
   } catch (error) {
     console.error('Error fetching images:', error.message);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+// Enable CORS for all routes
+app.use(cors());
 
 // Start the server
 app.listen(port, () => {
