@@ -30,11 +30,6 @@ app.get('/fetch-images', async (req, res) => {
   }
 });
 
-const allowedOrigins = [
-  'https://style-guide-7a5f76.webflow.io/',
-  'http://localhost:3000/',
-];
-
 const corsOptions = {
   origin: '*',
 };
